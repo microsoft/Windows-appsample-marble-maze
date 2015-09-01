@@ -1,0 +1,56 @@
+<!---
+  category: GraphicsAndAnimation
+  samplefwlink: http://go.microsoft.com/fwlink/?LinkId=624011
+--->
+
+# DirectX marble maze game sample
+
+Marble Maze is a sample Universal Windows Platform (UWP) and DirectX app that demonstrates how to build a basic 3D game using DirectX. This game is a simple labyrinth game where the player is challenged to roll a marble through a maze of pitfalls using tilt controls.
+
+This sample is written in C++ and requires some experience with graphics programming and DirectX. Complete content that examines this code can be found at Developing Marble Maze, a game in C++ and DirectX.
+
+## Related topics
+- [**Marble Maze**]( http://go.microsoft.com/fwlink/?LinkId=624010)
+- **Create an app using DirectX**
+- **Walkthrough: create a simple game with DirectX**
+- **Direct3D 11 graphics**
+- **Direct2D graphics** 
+- **DirectX HLSL** 
+- **XAudio2**
+- **XInput**
+- **Developing games**
+
+### Features areas
+- Incorporating the Windows Runtime into your DirectX game for full Windows Developer Preview support 
+- Using DirectX to render 3D graphics for display in a game 
+- Implementing simple vertex and pixel shaders with HLSL 
+- Developing simple physics and collision behaviors in a DirectX game 
+- Handling input from accelerometer, touch, and mouse, and game controller with the Windows Runtime and XInput 
+- Playing and mixing sound effects and background music with XAudio2 
+
+## Universal Windows Platform development
+
+This sample requires Visual Studio 2015 and the Windows Software Development Kit (SDK) for Windows 10. 
+
+[Get a free copy of Visual Studio 2015 Community Edition with support for building Universal Windows apps](http://go.microsoft.com/fwlink/?LinkID=280676)
+
+Additionally, to be informed of the latest updates to Windows and the development tools, join the [Windows Insider Program](https://insider.windows.com/ "Become a Windows Insider").
+
+## Build the sample
+
+1. Uunzip the archive.
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
+
+## Run the sample
+
+The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
+
+### Deploying the sample
+
+- Select Build > Deploy Solution. 
+
+### Deploying and running the sample
+
+- To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug 
