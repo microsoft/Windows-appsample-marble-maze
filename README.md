@@ -11,14 +11,13 @@ This sample is written in C++ and requires some experience with graphics program
 
 ## Related topics
 - [**Marble Maze**]( http://go.microsoft.com/fwlink/?LinkId=624010)
-- **Create an app using DirectX**
-- **Walkthrough: create a simple game with DirectX**
-- **Direct3D 11 graphics**
-- **Direct2D graphics** 
-- **DirectX HLSL** 
-- **XAudio2**
-- **XInput**
-- **Developing games**
+- [**Direct3D 11 game development**](https://msdn.microsoft.com/en-us/library/windows/apps/mt228367.aspx)
+- [**Create a simple UWP game with DirectX**](https://msdn.microsoft.com/en-us/library/windows/apps/mt210793.aspx)
+- [**Direct3D 11 graphics**](https://msdn.microsoft.com/en-us/library/windows/apps/ff476080.aspx)
+- [**Direct2D graphics** ](https://msdn.microsoft.com/en-us/library/windows/apps/dd370990.aspx)
+- [**XAudio2**](https://msdn.microsoft.com/en-us/library/windows/apps/hh405049.aspx)
+- [**XInput**](https://msdn.microsoft.com/en-us/library/windows/apps/hh405053.aspx)
+- [**Developing games**](https://msdn.microsoft.com/en-us/library/windows/apps/mt228375.aspx)
 
 ### Features areas
 - Incorporating the Windows Runtime into your DirectX game for full Windows Developer Preview support 
