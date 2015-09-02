@@ -14,13 +14,14 @@ This sample is written in C++ and requires some experience with graphics program
 - [**Direct3D 11 game development**](https://msdn.microsoft.com/en-us/library/windows/apps/mt228367.aspx)
 - [**Create a simple UWP game with DirectX**](https://msdn.microsoft.com/en-us/library/windows/apps/mt210793.aspx)
 - [**Direct3D 11 graphics**](https://msdn.microsoft.com/en-us/library/windows/apps/ff476080.aspx)
+- [**HLSL**](https://msdn.microsoft.com/en-us/library/windows/desktop/bb509561.aspx)
 - [**Direct2D graphics** ](https://msdn.microsoft.com/en-us/library/windows/apps/dd370990.aspx)
 - [**XAudio2**](https://msdn.microsoft.com/en-us/library/windows/apps/hh405049.aspx)
 - [**XInput**](https://msdn.microsoft.com/en-us/library/windows/apps/hh405053.aspx)
 - [**Developing games**](https://msdn.microsoft.com/en-us/library/windows/apps/mt228375.aspx)
 
 ### Features areas
-- Incorporating the Windows Runtime into your DirectX game for full Windows Developer Preview support 
+- Incorporating the Windows Runtime into your DirectX game 
 - Using DirectX to render 3D graphics for display in a game 
 - Implementing simple vertex and pixel shaders with HLSL 
 - Developing simple physics and collision behaviors in a DirectX game 
