@@ -5,7 +5,7 @@
 
 # DirectX marble maze game sample
 
-Marble Maze is a sample Universal Windows Platform (UWP) and DirectX app that demonstrates how to build a basic 3D game using DirectX. This game is a simple labyrinth game where the player is challenged to roll a marble through a maze of pitfalls using tilt controls.
+A mini-app that shows how to build a basic 3D game using DirectX on the Universal Windows Platform (UWP). This game is a simple labyrinth game where the player is challenged to roll a marble through a maze of pitfalls using tilt controls.
 
 This sample is written in C++ and requires some experience with graphics programming and DirectX. Complete content that examines this code can be found at Developing Marble Maze, a game in C++ and DirectX.
 
