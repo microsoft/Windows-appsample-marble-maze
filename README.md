@@ -12,26 +12,28 @@ This game is a simple labyrinth game where the player is challenged to roll a ma
 
 This sample is written in C++ and requires some experience with graphics programming and DirectX. 
 Complete content that examines this code can be found at 
-[Developing Marble Maze, a UWP game in C++ and DirectX](https://msdn.microsoft.com/en-us/windows/uwp/gaming/developing-marble-maze-a-windows-store-game-in-cpp-and-directx).
+[Developing Marble Maze, a UWP game in C++ and DirectX](https://msdn.microsoft.com/windows/uwp/gaming/developing-marble-maze-a-windows-store-game-in-cpp-and-directx).
 
-## Related topics
-- [Marble Maze]( http://go.microsoft.com/fwlink/?LinkId=624010)
-- [Direct3D 11 game development](https://msdn.microsoft.com/en-us/library/windows/apps/mt228367.aspx)
-- [Create a simple UWP game with DirectX](https://msdn.microsoft.com/en-us/library/windows/apps/mt210793.aspx)
-- [Direct3D 11 graphics](https://msdn.microsoft.com/en-us/library/windows/apps/ff476080.aspx)
-- [HLSL](https://msdn.microsoft.com/en-us/library/windows/desktop/bb509561.aspx)
-- [Direct2D graphics ](https://msdn.microsoft.com/en-us/library/windows/apps/dd370990.aspx)
-- [XAudio2](https://msdn.microsoft.com/en-us/library/windows/apps/hh405049.aspx)
-- [XInput](https://msdn.microsoft.com/en-us/library/windows/apps/hh405053.aspx)
-- [Developing games](https://msdn.microsoft.com/en-us/library/windows/apps/mt228375.aspx)
+## Features
 
-### Features areas
 - Incorporating the Windows Runtime into your DirectX game 
 - Using DirectX to render 3D graphics for display in a game 
 - Implementing simple vertex and pixel shaders with HLSL 
 - Developing simple physics and collision behaviors in a DirectX game 
 - Handling input from accelerometer, touch, and mouse, and game controller with the Windows Runtime and XInput 
 - Playing and mixing sound effects and background music with XAudio2 
+
+## Related topics
+
+[Marble Maze]( http://go.microsoft.com/fwlink/?LinkId=624010)  
+[Direct3D 11 game development](https://msdn.microsoft.com/library/windows/apps/mt228367.aspx)  
+[Create a simple UWP game with DirectX](https://msdn.microsoft.com/library/windows/apps/mt210793.aspx)  
+[Direct3D 11 graphics](https://msdn.microsoft.com/library/windows/apps/ff476080.aspx)  
+[HLSL](https://msdn.microsoft.com/library/windows/desktop/bb509561.aspx)  
+[Direct2D graphics ](https://msdn.microsoft.com/library/windows/apps/dd370990.aspx)  
+[XAudio2](https://msdn.microsoft.com/library/windows/apps/hh405049.aspx)  
+[XInput](https://msdn.microsoft.com/library/windows/apps/hh405053.aspx)  
+[Developing games](https://msdn.microsoft.com/library/windows/apps/mt228375.aspx)  
 
 ## Universal Windows Platform development
 
