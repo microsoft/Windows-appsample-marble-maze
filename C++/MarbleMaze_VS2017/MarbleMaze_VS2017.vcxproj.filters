@@ -32,6 +32,7 @@
     <None Include="Media\Models\maze1.sdkmesh">
       <Filter>Media\Models</Filter>
     </None>
+    <None Include="MarbleMaze_VS2017_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Shared\mediumtile-sdk.png">

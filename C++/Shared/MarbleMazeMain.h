@@ -141,6 +141,18 @@ namespace MarbleMaze
         bool            m_deferredResourcesReady;
         PersistentState^ m_persistentState;
 
+		// Input
+		Platform::Collections::Vector<Windows::Gaming::Input::Gamepad^>^	m_myGamepads;
+		Windows::Gaming::Input::Gamepad^									m_gamepad;
+		Windows::Gaming::Input::GamepadReading								m_newReading;
+		Windows::Gaming::Input::GamepadReading								m_oldReading;
+		bool																m_currentGamepadNeedsRefresh;
+		const float															m_deadzoneRadius = 0.1f;
+		const float															m_deadzoneSquared = m_deadzoneRadius * m_deadzoneRadius;
+		const float															m_controllerScaleFactor = 8.0f;
+		const float															m_touchScaleFactor = 2.0f;
+		const float															m_accelerometerScaleFactor = 3.5f;
+
         HRESULT ExtractTrianglesFromMesh(
             SDKMesh& mesh,
             const char* meshName,
@@ -153,5 +165,10 @@ namespace MarbleMaze
         void SetGameState(GameState nextState);
         void SaveState();
         void LoadState();
-    };
+
+		bool ButtonJustPressed(Windows::Gaming::Input::GamepadButtons selection);
+		bool ButtonJustReleased(Windows::Gaming::Input::GamepadButtons selection);
+		Windows::Gaming::Input::Gamepad^ GetLastGamepad();
+		void LogMessage(Platform::Object^ obj);
+};
 }

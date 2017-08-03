@@ -477,7 +477,6 @@ void SDKMesh::TransformFrameAbsolute(uint32 frame, double time)
     XMMATRIX rot2;
     XMVECTOR quat1;
     XMVECTOR quat2;
-    XMMATRIX to;
     XMMATRIX invTo;
     XMMATRIX from;
 
@@ -548,10 +547,10 @@ void SDKMesh::RenderMesh(uint32 meshIndex, bool adjacent, ID3D11DeviceContext* d
     DXGI_FORMAT indexBufferFormat = DXGI_FORMAT_R16_UINT;
     switch (indexBufferArray[mesh->IndexBuffer].IndexType)
     {
-        case SDKMeshIndexType::Bits16:
+        case static_cast<UINT32>(SDKMeshIndexType::Bits16):
             indexBufferFormat = DXGI_FORMAT_R16_UINT;
             break;
-        case SDKMeshIndexType::Bits32:
+        case static_cast<UINT32>(SDKMeshIndexType::Bits32):
             indexBufferFormat = DXGI_FORMAT_R32_UINT;
             break;
     };
@@ -916,9 +915,9 @@ DXGI_FORMAT SDKMesh::GetIndexBufferFormat(uint32 mesh)
 {
     switch (m_indexBufferArray[m_meshArray[mesh].IndexBuffer].IndexType)
     {
-        case SDKMeshIndexType::Bits16:
+        case static_cast<UINT32>(SDKMeshIndexType::Bits16):
             return DXGI_FORMAT_R16_UINT;
-        case SDKMeshIndexType::Bits32:
+        case static_cast<UINT32>(SDKMeshIndexType::Bits32):
             return DXGI_FORMAT_R32_UINT;
     };
 

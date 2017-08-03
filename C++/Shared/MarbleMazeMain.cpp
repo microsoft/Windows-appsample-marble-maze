@@ -12,6 +12,10 @@
 #include "DirectXHelper.h" // For ThrowIfFailed
 
 using namespace MarbleMaze;
+using namespace Windows::Gaming::Input;
+using namespace Platform::Collections;
+using namespace Windows::Foundation;
+using namespace Windows::System::Diagnostics;
 
 inline D2D1_RECT_F ConvertRect(Windows::Foundation::Size source)
 {
@@ -93,6 +97,34 @@ MarbleMazeMain::MarbleMazeMain(const std::shared_ptr<DX::DeviceResources>& devic
     m_timer.SetFixedTimeStep(true);
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
+
+	// Input
+	m_myGamepads = ref new Vector<Gamepad^>();
+
+	for (auto gamepad : Gamepad::Gamepads)
+	{
+		m_myGamepads->Append(gamepad);
+	}
+
+	Gamepad::GamepadAdded += ref new EventHandler<Gamepad^>([=](Platform::Object^, Gamepad^ args)
+	{
+		m_myGamepads->Append(args);
+		m_currentGamepadNeedsRefresh = true;
+	});
+
+	Gamepad::GamepadRemoved += ref new EventHandler<Gamepad ^>([=](Platform::Object^, Gamepad^ args)
+	{
+		unsigned int indexRemoved;
+
+		if (m_myGamepads->IndexOf(args, &indexRemoved))
+		{
+			m_myGamepads->RemoveAt(indexRemoved);
+			m_currentGamepadNeedsRefresh = true;
+		}
+	});
+
+	m_gamepad = GetLastGamepad();
+	m_currentGamepadNeedsRefresh = false;
 }
 
 MarbleMazeMain::~MarbleMazeMain()
@@ -662,7 +694,6 @@ void MarbleMazeMain::Update()
     // Update scene objects.
     m_timer.Tick([&]()
     {
-
         // When the game is first loaded, we display a load screen
         // and load any deferred resources that might be too expensive
         // to load during initialization.
@@ -670,7 +701,6 @@ void MarbleMazeMain::Update()
         {
             // At this point we can draw a progress bar, or if we had
             // loaded audio, we could play audio during the loading process.
-
             return;
         }
 
@@ -681,14 +711,18 @@ void MarbleMazeMain::Update()
 
         UserInterface::GetInstance().Update(static_cast<float>(m_timer.GetTotalSeconds()), static_cast<float>(m_timer.GetElapsedSeconds()));
 
-        if (m_gameState == GameState::Initial)
-            SetGameState(GameState::MainMenu);
+		if (m_gameState == GameState::Initial)
+		{
+			SetGameState(GameState::MainMenu);
+		}
 
         switch (m_gameState)
         {
         case GameState::PreGameCountdown:
-            if (m_preGameCountdownTimer.IsCountdownComplete())
-                SetGameState(GameState::InGameActive);
+			if (m_preGameCountdownTimer.IsCountdownComplete())
+			{
+				SetGameState(GameState::InGameActive);
+			}
             break;
         }
 
@@ -697,81 +731,26 @@ void MarbleMazeMain::Update()
         float combinedTiltX = 0.0f;
         float combinedTiltY = 0.0f;
 
-        // On phone this array will always be false since the values are set by a controller.
-		// The array size of 7 is the number of elements in the buttons array farther below.
-        bool combinedButtonPressed[7] = { false, };
-#if WINAPI_FAMILY != WINAPI_FAMILY_PHONE_APP
-        // XINPUT is not available on PHONE so we will skip all controller processing.
-
-        // This array contains the constants from XINPUT that map to the
-        // particular buttons that are used by the game.
-        // The index of the array is used to associate the state of that button in
-        // the wasButtonDown, isButtonDown, and combinedButtonPressed variables.
-
-        static const WORD buttons [] =
-        {
-            XINPUT_GAMEPAD_A,
-            XINPUT_GAMEPAD_START,
-            XINPUT_GAMEPAD_DPAD_UP,
-            XINPUT_GAMEPAD_DPAD_DOWN,
-            XINPUT_GAMEPAD_DPAD_LEFT,
-            XINPUT_GAMEPAD_DPAD_RIGHT,
-            XINPUT_GAMEPAD_BACK,
-        };
-
-        static const int buttonCount = ARRAYSIZE(buttons);
-        static bool wasButtonDown[XUSER_MAX_COUNT][buttonCount] = { false, };
-        bool isButtonDown[XUSER_MAX_COUNT][buttonCount] = { false, };
-
-        // Account for input on any connected controller.
-        XINPUT_STATE inputState = { 0 };
-        for (DWORD userIndex = 0; userIndex < XUSER_MAX_COUNT; ++userIndex)
-        {
-            DWORD result = XInputGetState(userIndex, &inputState);
-            if (result != ERROR_SUCCESS)
-                continue;
-
-            SHORT thumbLeftX = inputState.Gamepad.sThumbLX;
-            if (abs(thumbLeftX) < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
-                thumbLeftX = 0;
-
-            SHORT thumbLeftY = inputState.Gamepad.sThumbLY;
-            if (abs(thumbLeftY) < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
-                thumbLeftY = 0;
-
-            combinedTiltX += static_cast<float>(thumbLeftX) / 32768.0f;
-            combinedTiltY += static_cast<float>(thumbLeftY) / 32768.0f;
-
-            for (int i = 0; i < buttonCount; ++i)
-                isButtonDown[userIndex][i] = (inputState.Gamepad.wButtons & buttons[i]) == buttons[i];
-        }
-
-        for (int i = 0; i < buttonCount; ++i)
-        {
-            for (DWORD userIndex = 0; userIndex < XUSER_MAX_COUNT; ++userIndex)
-            {
-                bool pressed = !wasButtonDown[userIndex][i] && isButtonDown[userIndex][i];
-                combinedButtonPressed[i] = combinedButtonPressed[i] || pressed;
-            }
-        }
-#endif
-
         // Check whether the user paused or resumed the game.
-        // XINPUT_GAMEPAD_START
-        if (combinedButtonPressed[1] || m_pauseKeyPressed)
+        if (ButtonJustPressed(GamepadButtons::Menu) || m_pauseKeyPressed)
         {
             m_pauseKeyPressed = false;
-            if (m_gameState == GameState::InGameActive)
-                SetGameState(GameState::InGamePaused);
-            else if (m_gameState == GameState::InGamePaused)
-                SetGameState(GameState::InGameActive);
+
+			if (m_gameState == GameState::InGameActive)
+			{
+				SetGameState(GameState::InGamePaused);
+			}  
+			else if (m_gameState == GameState::InGamePaused)
+			{
+				SetGameState(GameState::InGameActive);
+			}
         }
 
         // Check whether the user restarted the game or cleared the high score table.
-        // XINPUT_GAMEPAD_BACK
-        if (combinedButtonPressed[6] || m_homeKeyPressed)
+        if (ButtonJustPressed(GamepadButtons::View) || m_homeKeyPressed)
         {
             m_homeKeyPressed = false;
+
             if (m_gameState == GameState::InGameActive ||
                 m_gameState == GameState::InGamePaused ||
                 m_gameState == GameState::PreGameCountdown)
@@ -788,6 +767,7 @@ void MarbleMazeMain::Update()
 
         // Check whether the user chose a button from the UI.
         bool anyPoints = !m_pointQueue.empty();
+
         while (!m_pointQueue.empty())
         {
             UserInterface::GetInstance().HitTest(m_pointQueue.front());
@@ -795,15 +775,9 @@ void MarbleMazeMain::Update()
         }
 
         // Handle menu navigation.
-
-        // XINPUT_GAMEPAD_A or XINPUT_GAMEPAD_START
-        bool chooseSelection = (combinedButtonPressed[0] || combinedButtonPressed[1]);
-
-        // XINPUT_GAMEPAD_DPAD_UP
-        bool moveUp = combinedButtonPressed[2];
-
-        // XINPUT_GAMEPAD_DPAD_DOWN
-        bool moveDown = combinedButtonPressed[3];
+        bool chooseSelection = (ButtonJustPressed(GamepadButtons::A) || ButtonJustPressed(GamepadButtons::Menu));
+		bool moveUp = ButtonJustPressed(GamepadButtons::DPadUp);
+		bool moveDown = ButtonJustPressed(GamepadButtons::DPadDown);
 
         switch (m_gameState)
         {
@@ -811,30 +785,35 @@ void MarbleMazeMain::Update()
             if (chooseSelection)
             {
                 m_audio.PlaySoundEffect(MenuSelectedEvent);
-
-                if (m_startGameButton.GetSelected())
-                    m_startGameButton.SetPressed(true);
-
-                if (m_highScoreButton.GetSelected())
-                    m_highScoreButton.SetPressed(true);
+				if (m_startGameButton.GetSelected())
+				{
+					m_startGameButton.SetPressed(true);
+				}
+				if (m_highScoreButton.GetSelected())
+				{
+					m_highScoreButton.SetPressed(true);
+				}
             }
             if (moveUp || moveDown)
             {
                 m_startGameButton.SetSelected(!m_startGameButton.GetSelected());
                 m_highScoreButton.SetSelected(!m_startGameButton.GetSelected());
-
                 m_audio.PlaySoundEffect(MenuChangeEvent);
             }
             break;
 
         case GameState::HighScoreDisplay:
-            if (chooseSelection || anyPoints)
-                SetGameState(GameState::MainMenu);
+			if (chooseSelection || anyPoints)
+			{
+				SetGameState(GameState::MainMenu);
+			}
             break;
 
         case GameState::PostGameResults:
-            if (chooseSelection || anyPoints)
-                SetGameState(GameState::HighScoreDisplay);
+			if (chooseSelection || anyPoints)
+			{
+				SetGameState(GameState::HighScoreDisplay);
+			}
             break;
 
         case GameState::InGamePaused:
@@ -846,34 +825,62 @@ void MarbleMazeMain::Update()
             break;
         }
 
-#if WINAPI_FAMILY != WINAPI_FAMILY_PHONE_APP
-        // On phone these arrays are not used and are simply commented out.
-        // Update button state for next frame.
-        memcpy(wasButtonDown, isButtonDown, sizeof(wasButtonDown));
-#endif
-
         // Update the game state if the user chose a menu option.
         if (m_startGameButton.IsPressed())
         {
             SetGameState(GameState::PreGameCountdown);
             m_startGameButton.SetPressed(false);
         }
+
         if (m_highScoreButton.IsPressed())
         {
             SetGameState(GameState::HighScoreDisplay);
             m_highScoreButton.SetPressed(false);
         }
 
+		// Process controller input.
+#if WINAPI_FAMILY != WINAPI_FAMILY_PHONE_APP // Only process controller input when the device is not a phone.
+
+		if (m_currentGamepadNeedsRefresh)
+		{
+			auto mostRecentGamepad = GetLastGamepad();
+
+			if (m_gamepad != mostRecentGamepad)
+			{
+				m_gamepad = mostRecentGamepad;
+			}
+
+			m_currentGamepadNeedsRefresh = false;
+		}
+
+		if (m_gamepad != nullptr)
+		{
+			m_oldReading = m_newReading;
+			m_newReading = m_gamepad->GetCurrentReading();
+		}
+
+		float leftStickX = static_cast<float>(m_newReading.LeftThumbstickX);
+		float leftStickY = static_cast<float>(m_newReading.LeftThumbstickY);
+
+		auto oppositeSquared = leftStickY * leftStickY;
+		auto adjacentSquared = leftStickX * leftStickX;
+
+		if ((oppositeSquared + adjacentSquared) > m_deadzoneSquared)
+		{
+			combinedTiltX += leftStickX * m_controllerScaleFactor;
+			combinedTiltY += leftStickY * m_controllerScaleFactor;
+		}
+
+#endif
+
         // Account for touch input.
-        const float touchScalingFactor = 2.0f;
         for (TouchMap::const_iterator iter = m_touches.cbegin(); iter != m_touches.cend(); ++iter)
         {
-            combinedTiltX += iter->second.x * touchScalingFactor;
-            combinedTiltY += iter->second.y * touchScalingFactor;
+            combinedTiltX += iter->second.x * m_touchScaleFactor;
+            combinedTiltY += iter->second.y * m_touchScaleFactor;
         }
 
         // Account for sensors.
-        const float acceleromterScalingFactor = 3.5f;
         if (m_accelerometer != nullptr)
         {
             Windows::Devices::Sensors::AccelerometerReading^ reading =
@@ -881,8 +888,8 @@ void MarbleMazeMain::Update()
 
             if (reading != nullptr)
             {
-                combinedTiltX += static_cast<float>(reading->AccelerationX) * acceleromterScalingFactor;
-                combinedTiltY += static_cast<float>(reading->AccelerationY) * acceleromterScalingFactor;
+                combinedTiltX += static_cast<float>(reading->AccelerationX) * m_accelerometerScaleFactor;
+                combinedTiltY += static_cast<float>(reading->AccelerationY) * m_accelerometerScaleFactor;
             }
         }
 
@@ -1318,6 +1325,13 @@ FORCEINLINE int FindMeshIndexByName(SDKMesh &mesh, const char *meshName)
     return -1; // Not found.
 }
 
+void MarbleMaze::MarbleMazeMain::LogMessage(Platform::Object^ obj)
+{
+	auto str = obj->ToString();
+	auto formattedText = std::wstring(str->Data()).append(L"\r\n");
+	OutputDebugString(formattedText.c_str());
+}
+
 HRESULT MarbleMazeMain::ExtractTrianglesFromMesh(
     SDKMesh& mesh,
     const char* meshName,
@@ -1395,3 +1409,28 @@ void MarbleMazeMain::OnDeviceRestored()
     LoadDeferredResources(true, true);
 }
 
+bool MarbleMaze::MarbleMazeMain::ButtonJustPressed(GamepadButtons selection)
+{
+	bool newSelectionPressed = (selection == (m_newReading.Buttons & selection));
+	bool oldSelectionPressed = (selection == (m_oldReading.Buttons & selection));
+	return newSelectionPressed && !oldSelectionPressed;
+}
+
+bool MarbleMaze::MarbleMazeMain::ButtonJustReleased(GamepadButtons selection)
+{
+	bool newSelectionReleased = (GamepadButtons::None == (m_newReading.Buttons & selection));
+	bool oldSelectionReleased = (GamepadButtons::None == (m_oldReading.Buttons & selection));
+	return newSelectionReleased && !oldSelectionReleased;
+}
+
+Gamepad^ MarbleMaze::MarbleMazeMain::GetLastGamepad()
+{
+	Gamepad^ gamepad = nullptr;
+
+	if (m_myGamepads->Size > 0)
+	{
+		gamepad = m_myGamepads->GetAt(m_myGamepads->Size - 1);
+	}
+
+	return gamepad;
+}
