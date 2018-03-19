@@ -36,11 +36,10 @@ Complete content that examines this code can be found at
 
 ## Universal Windows Platform development
 
-This sample requires Visual Studio 2017, the Windows 10 Creators Update, and the Software Development Kit (SDK) version 15063 for Windows 10.
+This sample requires [Visual Studio 2017 and the latest version of the Windows 10 SDK](http://go.microsoft.com/fwlink/?LinkID=280676). You can use the free Visual Studio Community Edition to build and run Windows Universal Platform (UWP) apps. 
 
-[Get a free copy of Visual Studio 2017 Community Edition with support for building Universal Windows apps](http://go.microsoft.com/fwlink/?LinkID=280676)
-
-Additionally, to be informed of the latest updates to Windows and the development tools, join the [Windows Insider Program](https://insider.windows.com/ "Become a Windows Insider").
+To get the latest updates to Windows and the development tools, and to help shape their development, join 
+the [Windows Insider Program](https://insider.windows.com).
 
 ## Build the sample
 
