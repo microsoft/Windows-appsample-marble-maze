@@ -11,3 +11,4 @@ It's a simple labyrinth game where the player is challenged to roll a marble thr
   - xaml
   technologies:
   - windows
+  vssolution: MarbleMaze_VS2017.sln
