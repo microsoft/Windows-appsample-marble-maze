@@ -5,10 +5,9 @@ sample:
 It's a simple labyrinth game where the player is challenged to roll a marble through a maze of pitfalls using tilt, mouse, or gamepad controls.
   image: MarbleMaze.png
   generateZip: true
-  author: karler
+  author: KarlErickson
   languages:
-  - csharp
-  - xaml
+  - cpp
   technologies:
   - windows
   vssolution: MarbleMaze_VS2017.sln
