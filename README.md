@@ -26,7 +26,7 @@ Complete content that examines this code can be found at
 ## Related topics
 
 * [Developing Marble Maze, a UWP game in C++ and DirectX](https://docs.microsoft.com/windows/uwp/gaming/developing-marble-maze-a-windows-store-game-in-cpp-and-directx)
-* [Create a simple UWP game with DirectX](https://msdn.microsoft.com/library/windows/apps/mt210793.aspx)
+* [Create a simple UWP game with DirectX](https://docs.microsoft.com/en-us/windows/uwp/gaming/tutorial--create-your-first-uwp-directx-game)
 * [Game programming](https://docs.microsoft.com/windows/uwp/gaming/index)
 * [DirectX programming](https://docs.microsoft.com/windows/uwp/gaming/directx-programming)
 * [Direct3D Graphics Learning Guide](https://docs.microsoft.com/windows/uwp/graphics-concepts/)
