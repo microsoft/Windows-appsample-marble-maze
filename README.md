@@ -12,7 +12,7 @@ It's a simple labyrinth game where the player is challenged to roll a marble thr
 
 This sample is written in C++ and requires some experience with graphics programming and DirectX. 
 Complete content that examines this code can be found at 
-[Developing Marble Maze, a UWP game in C++ and DirectX](https://msdn.microsoft.com/windows/uwp/gaming/developing-marble-maze-a-windows-store-game-in-cpp-and-directx).
+[Developing Marble Maze, a UWP game in C++ and DirectX](https://docs.microsoft.com/windows/uwp/gaming/developing-marble-maze-a-windows-store-game-in-cpp-and-directx).
 
 ## Features
 
@@ -26,13 +26,13 @@ Complete content that examines this code can be found at
 ## Related topics
 
 * [Developing Marble Maze, a UWP game in C++ and DirectX](https://docs.microsoft.com/windows/uwp/gaming/developing-marble-maze-a-windows-store-game-in-cpp-and-directx)
-* [Create a simple UWP game with DirectX](https://docs.microsoft.com/en-us/windows/uwp/gaming/tutorial--create-your-first-uwp-directx-game)
+* [Create a simple UWP game with DirectX](https://docs.microsoft.com/windows/uwp/gaming/tutorial--create-your-first-uwp-directx-game)
 * [Game programming](https://docs.microsoft.com/windows/uwp/gaming/index)
 * [DirectX programming](https://docs.microsoft.com/windows/uwp/gaming/directx-programming)
 * [Direct3D Graphics Learning Guide](https://docs.microsoft.com/windows/uwp/graphics-concepts/)
-* [Direct2D](https://msdn.microsoft.com/library/windows/desktop/dd370990) 
-* [HLSL](https://msdn.microsoft.com/library/windows/desktop/bb509561.aspx)
-* [XAudio2 APIs](https://msdn.microsoft.com/library/windows/desktop/hh405049)
+* [Direct2D](https://docs.microsoft.com/windows/desktop/Direct2D/direct2d-portal) 
+* [HLSL](https://docs.microsoft.com/windows/desktop/direct3dhlsl/dx-graphics-hlsl)
+* [XAudio2 APIs](https://docs.microsoft.com/windows/desktop/xaudio2/xaudio2-apis-portal)
 
 ## Universal Windows Platform development
 
