@@ -1,8 +1,3 @@
-<!---
-  category: Gaming GraphicsAndAnimation
-  samplefwlink: http://go.microsoft.com/fwlink/?LinkId=624011
---->
-
 ---
 topic: sample
 languages:
