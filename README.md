@@ -9,6 +9,11 @@ statusNotificationTargets:
 - codefirst
 ---
 
+<!---
+  category: Gaming GraphicsAndAnimation
+  samplefwlink: http://go.microsoft.com/fwlink/?LinkId=624011
+--->
+
 # DirectX marble maze game sample
 
 This is a mini-app that shows how to build a basic 3D game using DirectX on the Universal Windows Platform (UWP). 
