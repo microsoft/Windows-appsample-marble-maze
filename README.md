@@ -1,12 +1,13 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - cpp
 products:
 - windows
 - windows-uwp
 statusNotificationTargets:
-- codefirst
+- codefirst@microsoft.com
+description: "This is a mini-app that shows how to build a basic 3D game using DirectX on the Universal Windows Platform (UWP)."
 ---
 
 <!---
