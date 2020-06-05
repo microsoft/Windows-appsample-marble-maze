@@ -19,7 +19,7 @@ statusNotificationTargets:
 This is a mini-app that shows how to build a basic 3D game using DirectX on the Universal Windows Platform (UWP). 
 It's a simple labyrinth game where the player is challenged to roll a marble through a maze of pitfalls using tilt, mouse, or gamepad controls.
 
-> Note - This sample is targeted and tested for Windows 10, version 2004 (10.0; Build 19041), and Visual Studio 2019. If you prefer, you can use project properties to retarget the project(s) to Windows 10, version 1903 (10.0; Build 18362).
+> Note - This sample is targeted and tested for Windows 10, version 2004 (10.0; Build 19041, also known as the Windows 10 May 2020 Update), and Visual Studio 2019. If you prefer, you can use project properties to retarget the project(s) to Windows 10, version 1903 (10.0; Build 18362, also known as the Windows 10 May 2019 Update).
 
 ![MarbleMaze app in action](MarbleMaze.png)
 
@@ -51,7 +51,7 @@ Complete content that examines this code can be found at
 
 ### Prerequisites
 
-- Windows 10. Minimum: Windows 10, version 1809 (10.0; Build 17763), also known as the Windows 10 October 2018 Update.
+- Windows 10. Minimum: Windows 10, version 1809 (10.0; Build 17763, also known as the Windows 10 October 2018 Update).
 - [Windows 10 SDK](https://developer.microsoft.com/windows/downloads/windows-10-sdk). Minimum: Windows SDK version 10.0.17763.0 (Windows 10, version 1809).
 - [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) (or Visual Studio 2017). You can use the free Visual Studio Community Edition to build and run Windows Universal Platform (UWP) apps.
 
